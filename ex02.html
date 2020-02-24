@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Infomation</title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		//등록버튼
+        function addTempInfoTable(){
+        	var temp = [{name:$("#userName").val(), email:$("#userEmail").val(), area:$("#userArea").val()}];
+        	for (var i = 0; i < temp.length; i++) {
+        		$("#tempInfoTable").append("<tr><td>"+temp[i].name+' ('+temp[i].email+')'+
+        			"</td><td>"+temp[i].area+
+        			"</td><td><input type='button' id='infoDelete' value='삭제' onclick='deleteTempInfo()'><br><input type='button' id='infoSave' value='저장' onclick='saveTempInfo()'></td></tr>");
+        	}
+        }
+        //삭제버튼
+        function deleteTempInfo(){
+
+        }
+        //저장버튼
+        function saveTempInfo(){
+
+        }
+
+	</script>
+</head>
+<body>
+	이 름 : <input type="text" id="userName"><br>
+	이메일 : <input type="text" id="userEmail"><br>
+	지 역 : <input type="text" id="userArea"><br>
+	<input type="button" id="register" value="등 록" onclick="addTempInfoTable()"><br><br>
+
+	<table border="1" id="tempInfoTable">
+		<tr>
+			<th>
+				이 름 (이메일)
+			</th>
+			<th>
+				지 역
+			</th>
+			<th>
+				. . .
+			</th>
+		</tr>
+	</table>
+	<br><br>
+	<table border="1" id="userInfoTable">
+		<tr>
+			<td>
+				- 저 장 -
+			</td>
+		</tr>
+		<tr>
+			
+		</tr>
+	</table>
+
+</body>
+</html>

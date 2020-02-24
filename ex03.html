@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Infomation</title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		var gUserDatas = [];
+		//등록버튼
+        function addTempInfoTable(){
+        	var temp = {name:$("#userName").val(), email:$("#userEmail").val(), area:$("#userArea").val()};
+        	gUserDatas.push(temp);
+        	$("#tempInfoTable").html("");
+        	for (var i = 0; i < gUserDatas.length; i++) {
+        		$("#tempInfoTable").append("<tr id='tempRow'><td>"+gUserDatas[i].name+' ('+gUserDatas[i].email+')'+
+        			"</td><td>"+gUserDatas[i].area+
+        			"</td><td><input type='button' id='infoDelete' value='삭제' onclick='deleteTempInfo("+i+")'><br><input type='button' id='infoSave' value='저장' onclick='saveTempInfo()'></td></tr>");
+        	}
+        }
+
+        var userData = {};
+        //삭제버튼
+        function deleteTempInfo(rowNum){
+        	gUserDatas.splice(rowNum,1);
+        	$("#userInfoTable").html(JSON.stringify(gUserDatas));
+        	$("#tempInfoTable").html("");
+        	for (var i = 0; i < gUserDatas.length; i++) {
+        		$("#tempInfoTable").append("<tr id='tempRow'><td>"+gUserDatas[i].name+' ('+gUserDatas[i].email+')'+
+        			"</td><td>"+gUserDatas[i].area+
+        			"</td><td><input type='button' id='infoDelete' value='삭제' onclick='deleteTempInfo("+i+")'><br><input type='button' id='infoSave' value='저장' onclick='saveTempInfo()'></td></tr>");
+        	}
+        }
+        //저장버튼
+        function saveTempInfo(){
+        	var saveName = $("#userName").val();
+            var saveEmail = $("#userEmail").val();
+            var saveArea = $("#userArea").val();
+            
+            userData = [saveName, saveEmail, saveArea]
+            $("#userInfoTable").html(JSON.stringify(gUserDatas));
+        }
+
+	</script>
+</head>
+<body>
+	이 름 : <input type="text" id="userName"><br>
+	이메일 : <input type="text" id="userEmail"><br>
+	지 역 : <input type="text" id="userArea"><br>
+	<input type="button" id="register" value="등 록" onclick="addTempInfoTable()"><br><br>
+
+	<table border="1">
+		<tr>
+			<th>
+				이 름 (이메일)
+			</th>
+			<th>
+				지 역
+			</th>
+			<th>
+				. . .
+			</th>
+		</tr>
+		<tr id="tempInfoTable">
+			<td></td><td></td><td></td>
+		</tr>
+	</table>
+	<!-- <table border="1" id="tempInfoTable">
+	</table> -->
+	<br><br>
+	<table border="1">
+		<tr>
+			<td>
+				- 저 장 -
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span id="userInfoTable"></span>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>
