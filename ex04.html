@@ -5,39 +5,36 @@
 	<meta charset="UTF-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
-		var gUserDatas = [];
+		var gUserDatas = [];	//전역변수
+		
 		//등록버튼
         function addTempInfoTable(){
         	var temp = {name:$("#userName").val(), email:$("#userEmail").val(), area:$("#userArea").val()};
         	gUserDatas.push(temp);
-        	makeRow();
-        }
-
-        var userData = {};
-        //삭제버튼
-        function deleteTempInfo(rowNum){
-        	gUserDatas.splice(rowNum,1);
-        	$("#userInfoTable").html(JSON.stringify(gUserDatas));
-        	makeRow();
-        }
-        //저장버튼
-        function saveTempInfo(){
-        	var saveName = $("#userName").val();
-            var saveEmail = $("#userEmail").val();
-            var saveArea = $("#userArea").val();
-            
-            userData = [saveName, saveEmail, saveArea]
-            $("#userInfoTable").html(JSON.stringify(gUserDatas));
-        }
-
-        function makeRow(){
         	$("#tempInfoTable").html("<tr><th>이 름 (이메일)</th><th>지 역</th><th>. . .</th></tr>");
         	for (var i = 0; i < gUserDatas.length; i++) {
         		$("#tempInfoTable").append(
-        			"<tr id='tempRow'><td>"+gUserDatas[i].name+' ('+gUserDatas[i].email+')'+"</td><td>"+gUserDatas[i].area+
+        			"<tr><td>"+gUserDatas[i].name+' ('+gUserDatas[i].email+')'+"</td><td>"+gUserDatas[i].area+
+        			"</td><td><input type='button' id='infoDelete' value='삭제' onclick='deleteTempInfo("+i+")'><br><input type='button' id='infoSave' value='저장' onclick='saveTempInfo()'></td></tr>");
+        	}
+        }
+        //삭제버튼
+        function deleteTempInfo(rowNum){
+        	gUserDatas.splice(rowNum,1);	//splice 메서드 : 배열 요소 추가/삭제
+        	$("#userInfoTable").html(JSON.stringify(gUserDatas));
+        	$("#tempInfoTable").html("<tr><th>이 름 (이메일)</th><th>지 역</th><th>. . .</th></tr>");
+        	for (var i = 0; i < gUserDatas.length; i++) {
+        		$("#tempInfoTable").append(
+        			"<tr><td>"+gUserDatas[i].name+' ('+gUserDatas[i].email+')'+"</td><td>"+gUserDatas[i].area+
         			"</td><td><input type='button' id='infoDelete' value='삭제' onclick='deleteTempInfo("+i+")'><br><input type='button' id='infoSave' value='저장' onclick='saveTempInfo()'></td></tr>");
         	}
 
+        }
+        //저장버튼
+        function saveTempInfo(){
+			for (var i = 0; i < gUserDatas.length; i++) {
+        		$("#userInfoTable").html(JSON.stringify(gUserDatas[i]));
+        	}
         }
 
 	</script>
@@ -60,12 +57,7 @@
 				. . .
 			</th>
 		</tr>
-		<!-- <tr id="tempInfoTable">
-			<td></td><td></td><td></td>
-		</tr> -->
 	</table>
-	<!-- <table border="1" id="tempInfoTable">
-	</table> -->
 	<br><br>
 	<table border="1">
 		<tr>
